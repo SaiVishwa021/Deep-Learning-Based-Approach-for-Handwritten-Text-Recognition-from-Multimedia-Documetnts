@@ -134,9 +134,6 @@ tensorboard-data-server==0.7.1
 tensorflow==2.10.1
 tensorflow-addons==0.19.0
 tensorflow-estimator==2.13.0
-tensorflow-intel==2.13.0
-tensorflow-io-gcs-filesystem==0.31.0
-tensorflow-probability==0.21.0
 torch==2.0.1
 transformers==4.31.0
 translate==3.6.1
