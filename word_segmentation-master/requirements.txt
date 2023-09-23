@@ -64,8 +64,6 @@ google-crc32c==1.5.0
 google-pasta==0.2.0
 google-trans-new==1.1.9
 googletrans==4.0.0rc1
-gradio==3.40.1
-gradio_client==0.4.0
 grpcio==1.56.2
 h11==0.9.0
 h2==3.2.0
