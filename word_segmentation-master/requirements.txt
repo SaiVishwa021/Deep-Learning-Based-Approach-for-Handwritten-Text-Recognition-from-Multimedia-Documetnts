@@ -44,8 +44,6 @@ deep-translator==1.11.4
 defusedxml==0.7.1
 dill==0.3.7
 distlib==0.3.7
-Django==4.2.5
-django-core==1.4.1
 dm-tree==0.1.8
 dnspython==2.4.1
 easydict==1.10
