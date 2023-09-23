@@ -97,10 +97,6 @@ llvmlite==0.40.1
 mdurl==0.1.2
 mediapipe==0.10.3
 mistune==3.0.1
-mpmath==1.3.0
-msgpack==1.0.5
-multidict==6.0.4
-networkx==3.1
 nlp==0.4.0
 nltk==3.8.1
 notebook==7.0.3
@@ -109,8 +105,6 @@ numba==0.57.1
 numpy==1.24.3
 opencv-contrib-python==4.8.0.74
 opencv-python==4.7.0.72
-opt-einsum==3.3.0
-orjson==3.9.4
 overrides==7.4.0
 packaging==23.1
 pandas==2.0.3
@@ -124,9 +118,6 @@ pickleshare==0.7.5
 Pillow==9.5.0
 platformdirs==3.10.0
 plotly==5.17.0
-ply==3.11
-pooch==1.7.0
-preshed==3.0.9
 prometheus-client==0.17.1
 prompt-toolkit==3.0.38
 protobuf==3.20.3
@@ -140,7 +131,6 @@ python-json-logger==2.0.7
 python-Levenshtein==0.21.1
 python-multipart==0.0.6
 pytz==2023.3
-pytz-deprecation-shim==0.1.0.post0
 PyWavelets==1.4.1
 pywin32==306
 pywinpty==2.0.11
