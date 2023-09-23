@@ -55,7 +55,6 @@ filelock==3.12.2
 Flask==2.0.1
 flatbuffers==23.5.26
 fqdn==1.5.1
-frozenlist==1.4.0
 fsspec==2023.6.0
 gast==0.4.0
 gensim==4.3.2
