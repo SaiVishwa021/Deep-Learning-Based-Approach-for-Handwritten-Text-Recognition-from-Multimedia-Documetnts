@@ -45,7 +45,6 @@ defusedxml==0.7.1
 dill==0.3.7
 distlib==0.3.7
 dm-tree==0.1.8
-dnspython==2.4.1
 easydict==1.10
 editdistance==0.6.2
 executing==1.2.0
