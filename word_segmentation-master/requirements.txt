@@ -52,7 +52,7 @@ fastapi==0.101.0
 fastjsonschema==2.18.0
 ffmpy==0.3.1
 filelock==3.12.2
-Flask==2.3.3
+Flask==2.0.1
 flatbuffers==23.5.26
 fonttools==4.41.1
 fqdn==1.5.1
