@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+	<title>Text</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Montserrat', sans-serif;
+			background-image: url('static/bg.png');
+			background-repeat: no-repeat;
+		}
+
+		h1 {
+			margin: 0;
+			padding: 120px;
+			color: #fff;
+			text-align: center;
+			padding-bottom: 30px;
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		.form-container {
+			padding: 20px;
+			background-color: rgba(255, 255, 255, 0.8);
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin: 20px auto;
+			width: 500px;
+			max-width: 90%;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		h2 {
+			margin: 0;
+			padding: 20px;
+			text-align: center;
+			font-family: 'Montserrat', sans-serif;
+			margin-bottom: 20px;
+			font-weight: bold;
+			color: #1A237E;
+			font-size: 35px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 30px;
+			font-size: 27px;
+			color: black;
+			font-weight: bold;
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		input[type="file"] {
+			margin-bottom: 50px;
+		}
+
+		input[type="submit"] {
+			background-color: #1A237E;
+			color: #fff;
+			padding: 10px 5px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 18px;
+			font-weight: bold;
+			font-family: 'Montserrat', sans-serif;
+			transition: background-color 0.3s ease;
+			width: 200px;
+			margin: 0 auto;
+			display: block;
+			margin-bottom: 25px;
+			margin-top: 30px;
+
+		}
+
+		input[type="submit"]:hover {
+			background-color: #0D47A1;
+		}
+
+		#img-preview {
+			display: none;
+			max-width: 100%;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Handwritten Text Recognition from Old Documents</h1>
+	<form class="form-container" method="post" action="/" enctype="multipart/form-data">
+		<h2>Upload Your Image</h2>
+		<label for="img1">Image :</label>
+		<input type="file" id="img1" name="img1" accept="image/*" required>
+
+		<img id="img-preview" src="" alt="Image Preview">
+
+		<input type="submit" value="Extract">
+	</form>
+	<script>
+		document.getElementById("img1").addEventListener("change", function() {
+			var preview = document.getElementById("img-preview");
+			var file = this.files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					preview.src = e.target.result;
+					preview.style.display = "block";
+				};
+				reader.readAsDataURL(file);
+			} else {
+				preview.style.display = null;
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="static\styles.css" rel="stylesheet">
+
+    <title>Scriptease</title>
+
+
+</head>
+<body>   
+
+
+    <!-- Navbar-->
+    <header>
+    <div class="container-fluid position-relative nav-bar p-0">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">Script</span>Ease</h1>
+                </a>
+
+
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="#" class="nav-item nav-link active">Home</a>
+                        <a href="#predict" class="nav-item nav-link">Predict</a>
+                        <a href="#flowchart" class="nav-item nav-link">Flowchart</a>
+                        <a href="#about" class="nav-item nav-link">About Us</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</header>
+
+
+<!--Home-->
+
+<div class="page1">
+
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="p-3" style="max-width: 900px;">
+            <h4 class="text-black text-uppercase mb-md-5 mt-5 align-items-center text-center">Upload & Extract</h4>
+            <h1 class="display-3 text-black mb-md-4 mt-5 text-center">Get the extracted Text using our Application</h1>
+            <div class="text-center"> 
+                <a href="#predict" class="btn btn-primary py-md-3 px-md-5 mt-5">PREDICT</a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>	
+
+
+<!--Predict-->
+
+<div id="predict">
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <div class="text-center mb-3 pb-3">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"> PREDICT</h6>
+                    <h1>Upload the Image</h1>
+                </div>
+                <form class="form-container" method="post" action="/" enctype="multipart/form-data" id="uploaded-form">
+                    <label for="input-file" id="drop-area">
+                        <input type="file" accept=".jpg,.jpeg,.png" required id="input-file" name="img1" hidden>
+                        <div id="img-view">
+                            <img src="static\img\icon.png" alt="" id="icon-image">
+                            <p class="dropp">Drag and Drop or Click here <br>to Upload Image</p>
+                            <span>Upload any images from desktop</span>
+                        </div>
+                    </label>
+                    
+                    
+                    <!-- <div class="ino">
+                        <input style=" margin-left: 45%; margin-top: 50px;margin-bottom: 5%;" type="file" id="img1" name="img1" accept=".jpg, .jpeg, .png" required>
+                    </div>
+                    <p id="fileTypeError" style="color: red; display: none;">Only JPG, JPEG, and PNG files are accepted.</p>
+                    <img id="img-preview" src="" alt="Image Preview"> -->
+                    <button id="extract-button">EXTRACT</button>
+                </form>
+                <div class="loading-bar-container" id="loading-bar-container">
+                    <div class="loading-bar" id="loading-bar"></div>
+                    <div class="loading-text" id="loading-text">Loading...</div>
+                </div>
+                
+        </div>
+    </div>
+</div>
+</form>
+
+<!-- Add this script after the relevant HTML elements -->
+<script>
+    const loadingTextArray = [
+      "Loading...",
+      "Data preprocessing",
+      "Still processing....",
+      "Image Segmentation...",
+      "Detection Results...."
+      // Add more loading text strings as needed
+    ];
+  
+    let loadingTextIndex = 0;
+    let loadingIntervalId;
+    let loadingProgress = 0;
+    const loadingBar = document.getElementById("loading-bar");
+    const loadingText = document.getElementById("loading-text");
+  
+    function updateLoadingText() {
+      loadingText.textContent = loadingTextArray[loadingTextIndex];
+      loadingTextIndex = (loadingTextIndex + 1) % loadingTextArray.length;
+    }
+  
+    function updateLoadingBar() {
+      loadingProgress += 10; // Adjust this value as needed
+      loadingBar.style.width = loadingProgress + "%";
+    }
+  
+    function startLoadingTextChange() {
+      loadingIntervalId = setInterval(function () {
+        updateLoadingText();
+        updateLoadingBar();
+      }, 500); // Adjust the interval speed as needed
+    }
+  
+    function stopLoadingTextChange() {
+      clearInterval(loadingIntervalId);
+      loadingText.textContent = "Loading..."; // Reset loading text
+    }
+  
+    // Call startLoadingTextChange initially
+    startLoadingTextChange();
+  
+    // Add an event listener to the "EXTRACT" button
+    document.getElementById("extract-button").addEventListener("click", function() {
+      // Show the loading bar
+      document.getElementById("loading-bar-container").style.display = "flex";
+  
+      // Simulate a delay (remove this setTimeout in your actual code)
+      setTimeout(function() {
+        // Replace this with your actual code to predict handwritten text
+        var predictedText = "Your predicted text goes here"; // Replace with your data
+        // Update the extracted text and hide the loading bar
+        document.getElementById("textToSpeak").textContent = predictedText;
+        document.getElementById("loading-bar-container").style.display = "none";
+  
+        // Stop changing the loading text and progress
+        stopLoadingTextChange();
+      }, 60000); // Simulated delay of 2 seconds-2000
+    });
+
+</script>
+
+
+
+<div class="form-container">
+<div class="decoder-container" id="decoder-container" >
+    <!-- Decoder 1 -->
+
+    <!-- Decoder 2 -->
+    <div class="decoder" id="decoder2" >
+
+
+        <h3 class="text-center"><u></u></h3>
+        <h3 class="text-center"><u>Extracted Text</u></h3>
+
+
+        <p>...</p>
+
+        <!-- Content-->
+
+        <div id="textToSpeak">{{predicted_text}}</div>
+        <button id="speakButton">Speak Text</button>
+        <button id="txtDownload">Download</button>
+        <hr>
+
+        
+
+        <!--Translate-->
+
+        <div id="translate">
+            
+            <button id="translateButton">Translate in Tamil</button>
+            
+            <textarea id="translatedText" rows="4" cols="50" readonly style="display: none;">{{translated_text}}</textarea>
+            <button id="tamilDownload" style="display: none;">Download</button>
+            
+        </div>
+ 
+        <script>
+            document.getElementById('translateButton').addEventListener('click', function() {
+                // Toggle the display of the translated text area
+                var translatedText = document.getElementById('translatedText');
+                var downloadButton = document.getElementById('tamilDownload');
+        
+                if (translatedText.style.display === 'none') {
+                    translatedText.style.display = 'block';
+                } else {
+                    translatedText.style.display = 'none';
+                }
+        
+                // Toggle the display of the Download button based on the translated text display
+                downloadButton.style.display = (translatedText.style.display === 'block') ? 'block' : 'none';
+            });
+        </script>
+ 
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/google-translate-api"></script>
+        
+
+
+        <script>
+            // Function to speak the text
+            function speakText() {
+                const predictedText = document.getElementById("textToSpeak").textContent;
+                const speech = new SpeechSynthesisUtterance(predictedText);
+                speechSynthesis.speak(speech);
+            }
+        
+            // Function to create and download the PDF
+       
+       
+        
+            // Function to translate text
+            async function translateText() {
+                const predictedText = document.getElementById("textToSpeak").textContent;
+                const targetLanguage = document.getElementById("targetLanguage").value;
+                const translatedTextArea = document.getElementById("translatedText");
+        
+                try {
+                    const translation = await googleTranslate(predicted_text, targetLanguage);
+                    translatedTextArea.value = translation.text;
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translatedTextArea.value = 'Translation error';
+                }
+            }
+
+
+            function downloadTextAsTxt() {
+            // Get the text from the div
+            var textToDownload = document.getElementById('textToSpeak').textContent;
+            
+            // Create a Blob object with the text and set the MIME type
+            var blob = new Blob([textToDownload], { type: 'text/plain' });
+            
+            // Create a URL for the Blob
+            var url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary <a> element to trigger the download
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'downloaded_text.txt'; // Set the filename for the download
+            
+            // Trigger a click event on the <a> element
+            a.click();
+            
+            // Release the Blob URL
+            window.URL.revokeObjectURL(url);
+        }
+
+        function downloadTamtAsTxt() {
+            // Get the text from the div
+            var textToDownload = document.getElementById('translatedText').textContent;
+            
+            // Create a Blob object with the text and set the MIME type
+            var blob = new Blob([textToDownload], { type: 'text/plain' });
+            
+            // Create a URL for the Blob
+            var url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary <a> element to trigger the download
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'downloaded_text.txt'; // Set the filename for the download
+            
+            // Trigger a click event on the <a> element
+            a.click();
+            
+            // Release the Blob URL
+            window.URL.revokeObjectURL(url);
+        }
+        
+
+
+
+            // Add click event listeners to the buttons
+            document.getElementById("speakButton").addEventListener("click", speakText);
+            document.getElementById("txtDownload").addEventListener("click",downloadTextAsTxt );
+            document.getElementById("tamilDownload").addEventListener("click",downloadTamtAsTxt );
+            document.getElementById("translateButton").addEventListener("click", translateText);
+        
+            // Wrapper function to use google-translate-api library
+            function googleTranslate(text, targetLanguage) {
+                return new Promise((resolve, reject) => {
+                    googleTranslateApi(text, { to: targetLanguage }, (err, translation) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(translation);
+                        }
+                    });
+                });
+            }
+
+
+
+
+            
+        </script>
+        
+
+    </div>
+</div>
+</div></div></div>
+
+
+</div>
+</div>
+</div>
+
+
+
+<!--Survey-->
+<!--
+
+<div id="survey" style="margin-top:30px;">
+
+
+     <div class="text-center mb-3 pb-3">
+        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Survey</h6>
+        <h1>Our Works</h1>
+    </div>
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-6" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="img/t1.jpg" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">MODEL 1</h6>
+                        <h1 class="mb-5 mt-4">Extracted Text</h1>
+                        
+                        <p>
+                            hello
+
+                        </p>
+
+                        <a href="#predict" class="btn btn-primary mt-1">Check</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="container-fluid py-5">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-lg-6" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100" src="img/t2.jpg" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 pt-5 pb-lg-5">
+                <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">MODEL 2</h6>
+                        <h1 class="mb-5 mt-4">Extracted Text</h1>
+                        <p>
+                            hello
+
+                        </p>
+                       
+                    <a href="#predict" class="btn btn-primary mt-1">Check</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid py-5">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-lg-6" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100" src="img/t3.jpg" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 pt-5 pb-lg-5">
+                <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">MODEL 3</h6>
+                    <h1 class="mb-5 mt-4">Extracted Text</h1>
+
+                    <p>
+                        hello
+
+                    </p>
+                   
+                    <a href="#predict" class="btn btn-primary mt-1">Check</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+-->
+
+
+
+<!--flow-->
+<div id="flowchart" >
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+
+    <div class="text-center mb-3 pb-3">
+        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">FLOWCHART</h6>
+        <h1>WorkFlow</h1>
+    </div>
+
+    <div class="process-wrapper">
+            <div id="progress-bar-container">
+                <ul>
+                    <li class="step step01 active"><div class="step-inner" style="margin-left: 2%;">Data</div></li>
+                    <li class="step step02"><div class="step-inner">Preprocess</div></li>
+                    <li class="step step03"><div class="step-inner">Encode</div></li>
+                    <li class="step step04"><div class="step-inner">Splitting</div></li>
+                    <li class="step step05"><div class="step-inner">Training</div></li>
+                    <li class="step step06"><div class="step-inner" style="margin-left: -15%;">Segmentation</div></li>
+                    <li class="step step07"><div class="step-inner" style="margin-right: -25%;">Prediction  </div></li>
+                </ul>
+                
+                <div id="line">
+                    <div id="line-progress"></div>
+                </div>
+            </div>
+            <br><br>
+            
+            <div id="progress-content-section">
+                <div class="section-content discovery active">
+                    <div class="content-wrapper">
+                        <div class="image-container">
+                            <img class="home" src="static\img\flow1.jpg" alt="">
+                        </div>
+                        <div class="text-container">
+                            <h2>Data Collection</h2>
+                            <p style="margin: 0; padding: 0;">
+                                We meticulously acquired an extensive dataset to power our text extraction application. Our character dataset comprises <b>3500 examples</b> of English characters and digits, ensuring a comprehensive coverage of symbols. Additionally, we gathered a vast pool of <b>115,321 handwritten word samples (IAM dataset)</b>, encompassing various writing styles and variations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-content strategy">
+                    <div class="content-wrapper">
+                        <div class="image-container">
+                            <img class="home" src="/static/img/pre.gif" alt="">
+                        </div>
+                        <div class="text-container">
+                    <h2>Image Preprocessing</h2>
+                    <p>Prior to model training, we subjected the collected handwritten images to a rigorous preprocessing pipeline. This encompassed <b>noise reduction, contrast enhancement, and image normalization techniques</b>, all aimed at improving image quality and ensuring consistency in data presentation.</p>
+                </div>  
+                </div>
+                </div>
+                
+                <div class="section-content creative">
+                    <div class="content-wrapper">
+                        <div class="image-container">
+                            <img class="home" src="/static/img/lab.gif" alt="">
+                        </div>
+                        <div class="text-container">
+                    <h2>Label Encoding</h2>
+                    <p>To equip our model with the ability to recognize and interpret handwritten content accurately, we systematically assigned unique labels to each image. These <b>labels were aligned with a predefined character list</b>, creating a direct correspondence between image data and their actual content.</p>
+                </div>
+                    </div>
+                </div>
+                
+                <div class="section-content production">
+                    <div class="content-wrapper">
+                        <div class="image-container">
+                            <img class="splt" src="/static/img/splt.gif" alt="">
+                        </div>
+                        <div class="text-container">
+                    <h2>Data Splitting</h2>
+                    <p>We divided our dataset thoughtfully, with<b> 90% of the data allocated for model training and the remaining 10% reserved for testing</b>. This balanced split allowed us to assess the model's performance comprehensively and gauge its ability to generalize to new data.</p>
+                </div>
+                    </div>
+                </div>
+                
+                <div class="section-content analysis">
+                    <div class="content-wrapper">
+                        <div class="image-container">
+                            <img class="splt" src="/static/img/train.gif" alt="">
+                        </div>
+                        <div class="text-container">
+                    <h2>Data Training</h2>
+                    <p>Leveraging state-of-the-art machine learning or deep learning methods, we embarked on the training phase. Our model underwent extensive iterations, learning to <b>recognize and extract textual information from handwritten samples</b>. This training process aimed to optimize recognition <b>accuracy and minimize errors.</b></p>
+                </div>
+                    </div></div>
+                    <div class="section-content segmentation-prediction">
+                        <div class="content-wrapper">
+                            <div class="image-container">
+                                <img class="splt" src="/static/img/img.gif" alt="">
+                            </div>
+                            <div class="text-container">
+                        <h2>Image Segmentation</h2>
+                        <p>To precisely isolate individual <b>characters or words </b>within the handwritten images, we implemented advanced image segmentation algorithms. This step was essential for ensuring that our model could accurately delineate and interpret each component of the text.</p>
+                    </div>
+                        </div></div>
+                        <div class="section-content naveen">
+                            <div class="content-wrapper">
+                                <div class="image-container">
+                                    <img class="splt" src="/static/img/pred.gif" alt="">
+                                </div>
+                                <div class="text-container">
+                            <h2>Prediction</h2>
+                            <p> With a fully trained model with <b>accuracy of 94% </b>at our disposal, we seamlessly integrated it into our web application, enabling <b>real-time predictions. Users can now upload handwritten images,</b> and our system will swiftly and accurately extract text, making our application an invaluable asset for various text recognition tasks.</p>
+                        </div>
+                            </div></div>
+                            
+            </div>
+        </div>
+            
+        <br><br><br>
+            </div></div></div>
+</div>
+<!--flow-->
+
+
+
+   <!-- Team -->
+<div id="about">
+
+  
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">About us</h6>
+                <h1>Our Team </h1>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="/static/img/sir.png" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-github"></i></a>
+                                 <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/in/pravin-savaridass-00536b61/?originalSubdomain=in"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Mr.Pravin Savaridass M</h5>
+                            <p class="m-0">Mentor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="static/img/sai.jpeg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href="https://github.com/SaiVishwa021"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/in/sai-vishwa-b-36203a251/"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Sai Vishwa B</h5>
+                            <p class="m-0">Data Preprocessing</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="/static/img/suji.png" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href="https://github.com/Sujitha2003"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-outline-primary btn-square" href=" https://www.linkedin.com/in/sujitha-s-908844240"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Sujitha S</h5>
+                            <p class="m-0">Model Building</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="/static/img/kesa.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href=" https://github.com/Kesavarshini18"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/in/kesavarshini-t-14a64a242/"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Kesavarshini T</h5>
+                            <p class="m-0">Model Building</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="/static/img/shona.jpg" alt="">
+                            <div class="team-social">
+                               
+                                <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/in/shona-sakthivel/"><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-outline-primary btn-square" href="https://github.com/sakthivelshona"><i class="fab fa-github"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Shona S</h5>
+                            <p class="m-0">Frontend Development</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                    <div class="team-item bg-white mb-4">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="/static/img/visagan.jpeg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/in/visagan-r-308821265/"><i class="fab fa-github"></i></a>
+                                 <a class="btn btn-outline-primary btn-square" href="https://github.com/VisaganR"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h5 class="text-truncate">Visagan R</h5>
+                            <p class="m-0">Frontend Development</p>
+                        </div>
+                    </div>
+                </div>
+
+           
+                
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+
+<script>
+
+
+
+    //Image preview
+    document.getElementById("img1").addEventListener("change", function() {
+        var preview = document.getElementById("img-preview");
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.style.display = null;
+        }
+    });
+
+
+
+//Acceptance files - img only
+  const fileInput = document.getElementById('img1');
+  const fileTypeError = document.getElementById('fileTypeError');
+
+  fileInput.addEventListener('change', function () {
+    const fileName = this.value;
+    const fileExtension = fileName.split('.').pop().toLowerCase();
+    const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+    if (!allowedExtensions.includes(fileExtension)) {
+      fileTypeError.style.display = 'block';
+      this.value = ''; // Clear the file input
+    } else {
+      fileTypeError.style.display = 'none';
+    }
+  });
+
+// Copy text
+const copyTextElement = document.querySelector('#textToSpeak');
+const copyButton = document.createElement('a');
+copyButton.textContent = 'Copy';
+copyButton.style.fontSize = '14px'; 
+copyButton.style.color = 'black'; 
+copyButton.style.padding = '5px 5px';
+copyButton.style.marginLeft = '750px';
+
+const copyButtonContainer = document.querySelector('.decoder h3');
+copyButtonContainer.appendChild(copyButton);
+
+// Create an image element
+const image = document.createElement('img');
+image.src = '/static/img/copy.jpeg'; // Replace with the actual image path
+image.style.width = '20px'; // Adjust the width as needed
+image.style.height = '20px'; // Adjust the height as needed
+
+// Append the image after the copyButton
+copyButtonContainer.appendChild(image);
+
+copyButton.addEventListener('click', function() {
+    // Create a temporary textarea element to hold the text
+    const textarea = document.createElement('textarea');
+    textarea.value = copyTextElement.textContent;
+
+    // Append the textarea to the document
+    document.body.appendChild(textarea);
+
+    // Select the text within the textarea
+    textarea.select();
+
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+
+    // Hide the image
+    image.style.display = 'none';
+
+    // Provide visual feedback to the user
+    copyButton.textContent = 'Copied ✓';
+    
+    // Reset the button text and show the image after a brief delay
+    setTimeout(function() {
+        copyButton.textContent = 'Copy';
+        image.style.display = 'inline'; // Show the image again
+    }, 1500); // Change back to "Copy" after 1.5 seconds
+});
+  
+
+
+
+// Get the <p> element with the "decoder2" id
+    const extractedText = document.querySelector('#textToSpeak');
+
+// Get the download link element
+const downloadLink = document.querySelector('#downloadLink');
+
+// Add a click event listener to the download link
+downloadLink.addEventListener('click', function () {
+    // Get the text content of the <p> element
+    const textToDownload = extractedText.textContent;
+
+    // Create a Blob containing the text data
+    const blob = new Blob([textToDownload], { type: 'text/plain' });
+
+    // Create a temporary URL for the Blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Set the href attribute of the download link to the temporary URL
+    downloadLink.href = url;
+});
+
+
+
+document.getElementById("extract-button").addEventListener("click", async function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        const inputFile = document.getElementById("img1").files[0];
+        if (inputFile) {
+            try {
+                // Your extraction logic here
+                // For example, you can use FileReader to read the file's content
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const extractedText = event.target.result;
+                    // Update the DOM with the extracted text
+                    document.getElementById("textToSpeak").textContent = extractedText;
+                };
+                reader.readAsText(inputFile);
+            } catch (error) {
+                console.error('Extraction error:', error);
+                // Handle the error if needed
+            }
+        } else {
+            console.error('No file selected.');
+            // Handle the case when no file is selected
+        }
+    });
+  
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+     $(".step").click( function() {
+	$(this).addClass("active").prevAll().addClass("active");
+	$(this).nextAll().removeClass("active");
+});
+
+$(".step01").click( function() {
+	$("#line-progress").css("width", "2%");
+	$(".discovery").addClass("active").siblings().removeClass("active");
+});
+
+$(".step02").click( function() {
+	$("#line-progress").css("width", "17%");
+	$(".strategy").addClass("active").siblings().removeClass("active");
+});
+
+$(".step03").click( function() {
+	$("#line-progress").css("width", "33%");
+	$(".creative").addClass("active").siblings().removeClass("active");
+});
+
+$(".step04").click( function() {
+	$("#line-progress").css("width", "50%");
+	$(".production").addClass("active").siblings().removeClass("active");
+});
+
+$(".step05").click( function() {
+	$("#line-progress").css("width", "66%");
+	$(".analysis").addClass("active").siblings().removeClass("active");
+});
+$(".step06").click( function() {
+	$("#line-progress").css("width", "83%");
+	$(".segmentation-prediction").addClass("active").siblings().removeClass("active");
+});
+$(".step07").click( function() {
+	$("#line-progress").css("width", "100%");
+	$(".naveen").addClass("active").siblings().removeClass("active");
+});
+
+const inputFile = document.getElementById("input-file");
+const imageView = document.getElementById("img-view");
+const iconImage = document.getElementById("icon-image");
+const dropArea = document.getElementById("drop-area"); // Assuming you have a drop area element
+
+inputFile.addEventListener("change", uploadImage);
+iconImage.addEventListener("click", () => inputFile.click()); // Trigger file input click when icon is clicked
+
+function uploadImage() {
+    if (inputFile.files.length > 0) {
+        let imgLink = URL.createObjectURL(inputFile.files[0]);
+        imageView.style.backgroundImage = `url(${imgLink})`; // Use backticks for template literals
+        imageView.textContent = "";
+        imageView.style.border = "none"; // Corrected border style
+    }
+}
+
+dropArea.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    dropArea.classList.add("drag-over"); // You can add a visual indicator for drag-over
+});
+
+dropArea.addEventListener("dragleave", function () {
+    dropArea.classList.remove("drag-over"); // Remove the visual indicator when leaving the drop area
+    inputFile.files = e.dataTransfer.files;
+    uploadImage();
+});
+
+// dropArea.addEventListener("drop", function (e) {
+//     e.preventDefault();
+//     dropArea.classList.remove("drag-over"); // Remove the visual indicator when dropping
+
+//     inputFile.files = e.dataTransfer.files;
+//     uploadImage();
+// });
+
+ 
+</script>
+
+
+</body>
+</html>
