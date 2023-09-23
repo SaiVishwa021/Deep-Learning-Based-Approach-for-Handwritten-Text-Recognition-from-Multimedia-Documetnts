@@ -93,7 +93,6 @@ libclang==16.0.6
 libretranslatepy==2.1.1
 librosa==0.10.1
 linkify-it-py==2.0.2
-llvmlite==0.40.1
 mdurl==0.1.2
 mediapipe==0.10.3
 mistune==3.0.1
