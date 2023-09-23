@@ -137,7 +137,7 @@ tensorflow-estimator==2.13.0
 
 
 tensorflow-io-gcs-filesystem==0.31.0
-tensorflow-probability==0.21.0
+tensorflow-probability==0.20.0
 
 translate==3.6.1
 Werkzeug==2.2.3
