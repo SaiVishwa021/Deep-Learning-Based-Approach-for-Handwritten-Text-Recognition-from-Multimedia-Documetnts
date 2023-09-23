@@ -176,7 +176,7 @@ char_list = "!\"#&'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmn
 
 act_model,outputs,inputs=Model1()
 
-act_model.load_weights(r'C:\Users\SAI VISHWA\Desktop\word-segment-final\word_segmentation-master\sgdo-115339r-50e-89887t-9977v.hdf5')
+act_model.load_weights('sgdo-115339r-50e-89887t-9977v.hdf5')
 
 
         
@@ -186,7 +186,7 @@ def predict(filepath):
     i=bright_image(filepath)
     recognized_words1= []
     for j in range(i):
-        your_image_path = 'C:/Users/SAI VISHWA/Desktop/word-segment-final/word_segmentation-master/segmented/segment'+ str(j) + ".png"
+        your_image_path = './segmented/segment'+ str(j) + ".png"
         your_image = cv2.imread(your_image_path, cv2.IMREAD_GRAYSCALE)
 
         # Process the image using the process_image function
