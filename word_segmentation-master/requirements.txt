@@ -129,7 +129,7 @@ safetensors==0.3.2
 six==1.16.0
 sklearn-utils==0.0.15
 smart-open==6.4.0
-tensorboard==2.13.0
+tensorboard==2.11.2
 tensorboard-data-server==0.7.1
 tensorflow==2.13.0
 tensorflow-addons==0.21.0
@@ -143,10 +143,6 @@ tqdm==4.65.0
 traitlets==5.9.0
 transformers==4.31.0
 translate==3.6.1
-webcolors==1.13
-webencodings==0.5.1
-websocket-client==1.6.3
-websockets==11.0.3
 Werkzeug==2.3.7
 wget==3.2
 wordcloud==1.9.2
