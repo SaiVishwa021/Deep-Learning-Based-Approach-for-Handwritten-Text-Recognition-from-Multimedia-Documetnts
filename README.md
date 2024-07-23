@@ -45,7 +45,7 @@ The Beam Search Algorithm is a heuristic search algorithm that explores a graph 
 
 Here's a visual representation of the Beam Search Algorithm:
 
-![Beam Search Algorithm](https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Beam_Search_Algorithm.png/600px-Beam_Search_Algorithm.png)
+![Beam Search Algorithm]([https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Beam_Search_Algorithm.png/600px-Beam_Search_Algorithm.png](https://d2l.ai/_images/beam-search.svg))
 
 *Source: [Wikipedia](https://en.wikipedia.org/wiki/Beam_search)*
 
