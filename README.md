@@ -71,4 +71,9 @@ The dataset used for training and evaluating the model consists of handwritten t
    ```bash
    git clone https://github.com/SaiVishwa021/Handwritting_recognition_for_documents.git
    ```
-   
+
+## Acknowledgements
+1. TensorFlow/Keras for providing powerful deep learning frameworks.
+2. OpenCV for robust image processing tools.
+3. The research community for the foundational work in handwriting recognition and Beam Search Algorithms.
+
