@@ -49,10 +49,6 @@ Here's a visual representation of the Beam Search Algorithm:
 
 *To know more about the algorithm: [Wikipedia](https://en.wikipedia.org/wiki/Beam_search)*
 
-In the diagram:
-- The blue nodes represent the initial sequences.
-- The nodes expand to new sequences based on the possible next tokens.
-- The top paths are selected based on their scores (beam width).
 
 ### Advantages
 
@@ -73,6 +69,6 @@ The dataset used for training and evaluating the model consists of handwritten t
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/Deep_Learning_Handwritten_Text_Recognition.git
-   cd Deep_Learning_Handwritten_Text_Recognition
+   git clone https://github.com/SaiVishwa021/Handwritting_recognition_for_documents.git
    ```
+   
